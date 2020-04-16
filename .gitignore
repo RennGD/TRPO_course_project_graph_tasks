@@ -1,0 +1,4 @@
+object/*
+bin/*
+!object/.gitkeep
+!bin/.gitkeep

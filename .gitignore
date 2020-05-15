@@ -1,4 +1,6 @@
-object/*
+object/test/*
+object/src/*
 bin/*
-!object/.gitkeep
+!object/test/.gitkeep
+!object/src/.gitkeep
 !bin/.gitkeep

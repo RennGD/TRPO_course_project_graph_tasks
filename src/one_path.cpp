@@ -1,8 +1,8 @@
 #include "one_path.h"
 
-void DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
+vector<int>* DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
 {
-    int MinDist[Cities];
+    vector<int> MinDist(Cities);
     bool VisitTop[Cities];
     for (int i = 0; i < Cities; ++i) {
         if (!TableLength[MainPeak][i])
@@ -39,14 +39,5 @@ void DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
         }
         cout << "|" << endl;
     }
-
-    cout << "Наименьшее расстояние от " << MainPeak + 1
-         << " до всех вершин: " << endl;
-    for (int i = 0; i < Cities; ++i) {
-        cout << MainPeak + 1 << " ---> " << i + 1 << " = ";
-        if (MinDist[i] != 0)
-            cout << MinDist[i] << endl;
-        else
-            cout << "Невозможно проехать " << endl;
-    }
+    return &MinDist;
 }

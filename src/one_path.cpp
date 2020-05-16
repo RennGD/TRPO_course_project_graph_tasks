@@ -1,6 +1,7 @@
 #include "one_path.h"
 
-vector<int>* DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
+vector<int>*
+DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
 {
     vector<int> MinDist(Cities);
     bool VisitTop[Cities];
@@ -40,4 +41,40 @@ vector<int>* DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLeng
         cout << "|" << endl;
     }
     return &MinDist;
+}
+
+vector<int>*
+DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength)
+{
+    vector<int> MaxDist(Cities);
+    bool VisitTop[Cities];
+    for (int i = 0; i < Cities; ++i) {
+        if (!TableLength[MainPeak][i])
+            MaxDist[i] = INT_MIN;
+        else
+            MaxDist[i] = TableLength[MainPeak][i];
+        VisitTop[i] = false;
+    }
+
+    MaxDist[MainPeak] = 0;
+    int Index = 0, U = 0;
+    for (int i = 0; i < Cities; ++i) {
+        int Max = -1;
+        for (int j = 0; j < Cities; ++j) {
+            if (!VisitTop[j] and MaxDist[j] > Max) {
+                Max = MaxDist[j];
+                Index = j;
+            }
+        }
+        U = Index;
+        VisitTop[U] = true;
+        for (int j = 0; j < Cities; ++j) {
+            if (!VisitTop[j] and TableLength[U][j] != 0
+                and MaxDist[U] != INT_MIN
+                and (MaxDist[U] + TableLength[U][j] > MaxDist[j])) {
+                MaxDist[j] = MaxDist[U] + TableLength[U][j];
+            }
+        }
+    }
+    return &MaxDist;
 }

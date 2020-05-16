@@ -8,7 +8,6 @@ using namespace std;
 void input(int& a, int& b, vector<vector<int>>& A)
 {
     int N, k, l;
-    vector<vector<int>> A;
     ifstream fin;
 
     fin.open("input.txt");

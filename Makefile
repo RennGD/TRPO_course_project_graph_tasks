@@ -3,7 +3,7 @@ CXXFLAGS=-c -Wall
 LDFLAGS=
 VPATH=src object
 SOURCES_DIR=src/
-SOURCES=main.cpp connect.cpp
+SOURCES=main.cpp connect.cpp one_path.cpp
 OBJECTS_DIR=object/
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=bin/graph_tasks

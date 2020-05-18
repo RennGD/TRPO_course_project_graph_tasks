@@ -1,9 +1,11 @@
 #include "one_path.h"
 
-vector<int>*
-DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
+vector<int> DijkstraMin(
+        int Cities,
+        int MainPeak,
+        vector<vector<int>> TableLength,
+        vector<int> MinDist)
 {
-    vector<int> MinDist(Cities);
     bool VisitTop[Cities];
     for (int i = 0; i < Cities; ++i) {
         if (!TableLength[MainPeak][i])
@@ -33,20 +35,15 @@ DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
             }
         }
     }
-
-    for (int i = 0; i < Cities; ++i) {
-        for (int j = 0; j < Cities; ++j) {
-            cout << "|" << setw(4) << TableLength[i][j] << " ";
-        }
-        cout << "|" << endl;
-    }
-    return &MinDist;
+    return MinDist;
 }
 
-vector<int>*
-DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength)
+vector<int> DijkstraMax(
+        int Cities,
+        int MainPeak,
+        vector<vector<int>> TableLength,
+        vector<int> MaxDist)
 {
-    vector<int> MaxDist(Cities);
     bool VisitTop[Cities];
     for (int i = 0; i < Cities; ++i) {
         if (!TableLength[MainPeak][i])
@@ -76,5 +73,5 @@ DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength)
             }
         }
     }
-    return &MaxDist;
+    return MaxDist;
 }

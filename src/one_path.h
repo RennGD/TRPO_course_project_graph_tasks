@@ -8,9 +8,9 @@
 
 using namespace std;
 
-vector<int>*
+vector<int>
 DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength);
-vector<int>*
+vector<int>
 DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength);
 
 #endif

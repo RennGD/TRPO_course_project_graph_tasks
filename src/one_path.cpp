@@ -1,75 +1,75 @@
 #include "one_path.h"
 
 vector<int>
-DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength)
+dijkstra_min(int cities, int main_peak, vector<vector<int>> table_length)
 {
-    vector<int> MinDist;
-    MinDist.resize(Cities);
-    bool VisitTop[Cities];
-    for (int i = 0; i < Cities; ++i) {
-        if (!TableLength[MainPeak][i])
-            MinDist[i] = INT_MAX;
+    vector<int> min_dist;
+    min_dist.resize(cities);
+    bool visit_top[cities];
+    for (int i = 0; i < cities; ++i) {
+        if (!table_length[main_peak][i])
+            min_dist[i] = INT_MAX;
         else
-            MinDist[i] = TableLength[MainPeak][i];
-        VisitTop[i] = false;
+            min_dist[i] = table_length[main_peak][i];
+        visit_top[i] = false;
     }
 
-    MinDist[MainPeak] = 0;
-    int Index = 0, U = 0;
-    for (int i = 0; i < Cities; ++i) {
-        int Min = INT_MAX;
-        for (int j = 0; j < Cities; ++j) {
-            if (!VisitTop[j] and MinDist[j] < Min) {
-                Min = MinDist[j];
-                Index = j;
+    min_dist[main_peak] = 0;
+    int index = 0, u = 0;
+    for (int i = 0; i < cities; ++i) {
+        int min = INT_MAX;
+        for (int j = 0; j < cities; ++j) {
+            if (!visit_top[j] and min_dist[j] < min) {
+                min = min_dist[j];
+                index = j;
             }
         }
-        U = Index;
-        VisitTop[U] = true;
-        for (int j = 0; j < Cities; ++j) {
-            if (!VisitTop[j] and TableLength[U][j] != 0
-                and MinDist[U] != INT_MAX
-                and (MinDist[U] + TableLength[U][j] < MinDist[j])) {
-                MinDist[j] = MinDist[U] + TableLength[U][j];
+        u = index;
+        visit_top[u] = true;
+        for (int j = 0; j < cities; ++j) {
+            if (!visit_top[j] and table_length[u][j] != 0
+                and min_dist[u] != INT_MAX
+                and (min_dist[u] + table_length[u][j] < min_dist[j])) {
+                min_dist[j] = min_dist[u] + table_length[u][j];
             }
         }
     }
-    return MinDist;
+    return min_dist;
 }
 
 vector<int>
-DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength)
+dijkstra_max(int cities, int main_peak, vector<vector<int>> table_length)
 {
-    vector<int> MaxDist;
-    MaxDist.resize(Cities);
-    bool VisitTop[Cities];
-    for (int i = 0; i < Cities; ++i) {
-        if (!TableLength[MainPeak][i])
-            MaxDist[i] = INT_MIN;
+    vector<int> max_dist;
+    max_dist.resize(cities);
+    bool visit_top[cities];
+    for (int i = 0; i < cities; ++i) {
+        if (!table_length[main_peak][i])
+            max_dist[i] = INT_MIN;
         else
-            MaxDist[i] = TableLength[MainPeak][i];
-        VisitTop[i] = false;
+            max_dist[i] = table_length[main_peak][i];
+        visit_top[i] = false;
     }
 
-    MaxDist[MainPeak] = 0;
-    int Index = 0, U = 0;
-    for (int i = 0; i < Cities; ++i) {
-        int Max = -1;
-        for (int j = 0; j < Cities; ++j) {
-            if (!VisitTop[j] and MaxDist[j] > Max) {
-                Max = MaxDist[j];
-                Index = j;
+    max_dist[main_peak] = 0;
+    int index = 0, u = 0;
+    for (int i = 0; i < cities; ++i) {
+        int max = -1;
+        for (int j = 0; j < cities; ++j) {
+            if (!visit_top[j] and max_dist[j] > max) {
+                max = max_dist[j];
+                index = j;
             }
         }
-        U = Index;
-        VisitTop[U] = true;
-        for (int j = 0; j < Cities; ++j) {
-            if (!VisitTop[j] and TableLength[U][j] != 0
-                and MaxDist[U] != INT_MIN
-                and (MaxDist[U] + TableLength[U][j] > MaxDist[j])) {
-                MaxDist[j] = MaxDist[U] + TableLength[U][j];
+        u = index;
+        visit_top[u] = true;
+        for (int j = 0; j < cities; ++j) {
+            if (!visit_top[j] and table_length[u][j] != 0
+                and max_dist[u] != INT_MIN
+                and (max_dist[u] + table_length[u][j] > max_dist[j])) {
+                max_dist[j] = max_dist[u] + table_length[u][j];
             }
         }
     }
-    return MaxDist;
+    return max_dist;
 }

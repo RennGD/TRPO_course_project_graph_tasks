@@ -5,7 +5,8 @@
 
 using namespace std;
 
-void input(int& a, int& b, vector<vector<int>>& A);
-void output(vector<int> Min, vector<int> Max, int one_vertex, int one_edge);
+void input(
+        int& main_peak, int& secondary_peak, vector<vector<int>>& table_length);
+void output(vector<int> min, vector<int> max, int one_vertex, int one_edge);
 
 #endif

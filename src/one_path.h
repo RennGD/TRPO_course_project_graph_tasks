@@ -9,8 +9,8 @@
 using namespace std;
 
 vector<int>
-DijkstraMin(int Cities, int MainPeak, vector<vector<int>> TableLength);
+dijkstra_min(int cities, int main_peak, vector<vector<int>> table_length);
 vector<int>
-DijkstraMax(int Cities, int MainPeak, vector<vector<int>> TableLength);
+dijkstra_max(int cities, int main_peak, vector<vector<int>> table_length);
 
 #endif

@@ -5,42 +5,43 @@
 
 using namespace std;
 
-void input(int& a, int& b, vector<vector<int>>& A)
+void input(
+        int& main_peak, int& secondary_peak, vector<vector<int>>& table_length)
 {
     int N, k, l;
     ifstream fin;
 
     fin.open("input.txt");
-    fin >> N >> a >> b;
+    fin >> N >> main_peak >> secondary_peak;
 
-    A.resize(N);
-    for (int i = 0, size = A.size(); i < size; i++) {
-        A[i].resize(N);
+    table_length.resize(N);
+    for (int i = 0, size = table_length.size(); i < size; i++) {
+        table_length[i].resize(N);
     }
 
     while (fin) {
         fin >> k >> l;
-        fin >> A[k][l];
-        A[l][k] = A[k][l];
+        fin >> table_length[k][l];
+        table_length[l][k] = table_length[k][l];
     }
 
     fin.close();
 }
 
-void output(vector<int> Min, vector<int> Max, int one_vertex, int one_edge)
+void output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
 {
     ofstream fout;
 
     fout.open("output.txt");
 
     fout << "Minimal path between given vertices:\n    ";
-    for (int i = 0, m = Min.size(); i < m; i++) {
-        fout << Min[i] << "--";
+    for (int i = 0, m = min.size(); i < m; i++) {
+        fout << min[i] << "--";
     }
 
     fout << "\n\nMaximal path between given vertices:\n    ";
-    for (int i = 0, m = Max.size(); i < m; i++) {
-        fout << Max[i] << "--";
+    for (int i = 0, m = max.size(); i < m; i++) {
+        fout << max[i] << "--";
     }
 
     fout << "\n\nQuantity of paths between given vertices without repeating "

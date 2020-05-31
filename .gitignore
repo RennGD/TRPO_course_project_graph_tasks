@@ -4,3 +4,4 @@ bin/*
 !object/test/.gitkeep
 !object/src/.gitkeep
 !bin/.gitkeep
+.idea/

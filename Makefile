@@ -1,22 +1,33 @@
 CXX=g++
-CXXFLAGS=-c -Wall
+CXXFLAGS=-Wall -Werror -c --std=c++17
 LDFLAGS=
-VPATH=src object
+VPATH=src test object/src object/test thirdparty
 SOURCES_DIR=src/
-SOURCES=main.cpp connect.cpp one_path.cpp
+TEST_DIR=test/
 OBJECTS_DIR=object/
+BIN_DIR=bin/
+INCLUDES=-I thirdparty -I src
+SOURCES=$(notdir $(wildcard $(SOURCES_DIR)*.cpp))
+TESTS=$(notdir $(wildcard $(TEST_DIR)*.cpp))
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=bin/graph_tasks
+TEST_OBJECTS=$(TESTS:.cpp=.o)
+EXECUTABLE=graph_tasks
+TEST_EXECUTABLE=test
 
 .PHONY : all clean
 
-all : $(EXECUTABLE)
+all : $(BIN_DIR)$(EXECUTABLE) $(BIN_DIR)$(TEST_EXECUTABLE)
 
-clean:
-	rm $(OBJECTS_DIR)*.o
+clean :
+	rm -rf $(OBJECTS_DIR)$(SOURCES_DIR)*.o $(OBJECTS_DIR)$(TEST_DIR)*.o \
+	$(BIN_DIR)$(EXECUTABLE) $(BIN_DIR)$(TEST_EXECUTABLE)
 
-$(EXECUTABLE) : $(addprefix $(OBJECTS_DIR), $(OBJECTS))
+$(BIN_DIR)$(EXECUTABLE) : $(addprefix $(OBJECTS_DIR)$(SOURCES_DIR), $(OBJECTS))
 	$(CXX) $(LDFLAGS) $^ -o $@
 
+$(BIN_DIR)$(TEST_EXECUTABLE) : $(addprefix $(OBJECTS_DIR)$(TEST_DIR), $(TEST_OBJECTS)) \
+$(addprefix $(OBJECTS_DIR)$(SOURCES_DIR), $(filter-out main.o, $(OBJECTS)))
+	$(CXX) $(LDFLAGS) $(INCLUDES) $^ -o $@
+
 $(OBJECTS_DIR)%.o : %.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -o $@

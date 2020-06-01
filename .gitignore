@@ -1,3 +1,4 @@
+*.o
 object/test/*
 object/src/*
 bin/*

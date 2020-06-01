@@ -25,11 +25,13 @@ TEST_CASE("Check dijkstra min for correctness", "[dijkstra_min]")
     v[0][2] = v[2][0] = 8;
     v[1][2] = v[2][1] = 4;
     min_dist[2] = 7;
+
     REQUIRE(dijkstra_min(3, 0, v) == min_dist);
 
     v[0][1] = v[1][0] = 9;
     min_dist[0] = 8;
     min_dist[1] = 4;
     min_dist[2] = 0;
+
     REQUIRE(dijkstra_min(3, 3, v) == min_dist);
 }

@@ -7,7 +7,7 @@ TEST_CASE("Check dijkstra max for correctness", "[dijkstra_max]")
     std::vector<vector<int>> ve;
     std::vector<int> max_dist;
 
-    v.resize(2, vector<int>());
+    v.resize(2, vector<int>(2));
     max_dist.resize(2);
     v[0][0] = v[1][1] = 0;
     v[1][0] = v[0][1] = max_dist[1] = 5;
@@ -20,7 +20,7 @@ TEST_CASE("Check dijkstra max for correctness", "[dijkstra_max]")
 
     REQUIRE(dijkstra_max(2, 1, v) == max_dist);
 
-    ve.resize(3, vector<int>());
+    ve.resize(3, vector<int>(3));
     max_dist.resize(3);
     ve[0][2] = ve[2][0] = ve[0][0] = ve[1][1] = ve[2][2] = 0;
     ve[0][1] = ve[1][0] = max_dist[1] = 3;

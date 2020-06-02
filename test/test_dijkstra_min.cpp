@@ -3,7 +3,8 @@
 
 TEST_CASE("Check dijkstra min for correctness", "[dijkstra_min]")
 {
-    std::vector<vector<int>> v(2, vector<int>(2));
+    std::vector<vector<int>> v(2, vector<int>());
+    std::vector<vector<int>> ve(3, vector<int>());
     std::vector<int> min_dist;
 
     min_dist.resize(2);
@@ -17,7 +18,6 @@ TEST_CASE("Check dijkstra min for correctness", "[dijkstra_min]")
 
     REQUIRE(dijkstra_min(2, 1, v) == min_dist);
 
-    std::vector<vector<int>> ve(3, vector<int>(3));
     min_dist.resize(3, 0);
     ve[2][2] = ve[0][0] = ve[1][1] = min_dist[0] = 0;
     ve[0][1] = ve[1][0] = min_dist[1] = 3;
@@ -32,5 +32,5 @@ TEST_CASE("Check dijkstra min for correctness", "[dijkstra_min]")
     min_dist[1] = 4;
     min_dist[2] = 0;
 
-    REQUIRE(dijkstra_min(3, 3, ve) == min_dist);
+    REQUIRE(dijkstra_min(3, 2, ve) == min_dist);
 }

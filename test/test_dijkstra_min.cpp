@@ -18,7 +18,7 @@ TEST_CASE("Check dijkstra min for correctness", "[dijkstra_min]")
 
     REQUIRE(dijkstra_min(2, 1, v) == min_dist);
 
-    min_dist.resize(3, 0);
+    min_dist.resize(3);
     ve[2][2] = ve[0][0] = ve[1][1] = min_dist[0] = 0;
     ve[0][1] = ve[1][0] = min_dist[1] = 3;
     ve[0][2] = ve[2][0] = 8;

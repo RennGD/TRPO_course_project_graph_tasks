@@ -1,1 +1,1 @@
-# TRPO_course_project_graph_tasks
+[![Build Status](https://travis-ci.org/RennGD/TRPO_course_project_graph_tasks.svg?branch=master)](https://travis-ci.org/RennGD/TRPO_course_project_graph_tasks)

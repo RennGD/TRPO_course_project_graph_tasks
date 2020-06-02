@@ -29,8 +29,8 @@ TEST_CASE("Check dijkstra max for correctness", "[dijkstra_max]")
 
     REQUIRE(dijkstra_max(3, 0, ve) == max_dist);
 
-    v[0][2] = v[2][0] = 6;
-    v[1][2] = v[2][1] = 0;
+    ve[0][2] = ve[2][0] = 6;
+    ve[1][2] = ve[2][1] = 0;
     max_dist[0] = 3;
     max_dist[1] = 6;
     max_dist[2] = 9;

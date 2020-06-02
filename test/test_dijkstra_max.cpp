@@ -22,8 +22,8 @@ TEST_CASE("Check dijkstra max for correctness", "[dijkstra_max]")
 
     ve.resize(3, vector<int>(3));
     max_dist.resize(3);
+    ve[0][2] = ve[2][0] = v[0][0] = v[1][1] = ve[2][2] = 0;
     ve[0][1] = ve[1][0] = max_dist[1] = 3;
-    ve[0][2] = ve[2][0] = ve[2][2] = 0;
     ve[1][2] = ve[2][1] = max_dist[0] = 6;
     max_dist[2] = 9;
 

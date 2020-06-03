@@ -1,0 +1,11 @@
+Minimal path between given vertex and others:
+vrtx  0  1  2  3  4  5  6
+lgth  0  2  4  5  2  7  9
+
+Maximal path between given vertex and others:
+vrtx  0  1  2  3  4  5  6
+lgth 14 16 19 24 21  7 24
+
+Quantity of paths between given vertices without repeating vertices: 0
+
+Quantity of paths between given vertices without repeating edges: 0

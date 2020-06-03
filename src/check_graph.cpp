@@ -20,4 +20,5 @@ int connectivity(
         if (!visit_top[to])
             connectivity(table_length, cities, to);
     }
+    return 0;
 }

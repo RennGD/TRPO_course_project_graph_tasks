@@ -17,7 +17,7 @@ int connectivity(
     visit_top[main_peak] = true;
     for (size_t i = 0; i < table_length[main_peak].size(); ++i) {
         int to = table_length[main_peak][i];
-        if (!used[to])
+        if (!visit_top[to])
             connectivity(table_length, cities, to);
     }
 }

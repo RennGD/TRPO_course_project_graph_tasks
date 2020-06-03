@@ -2,34 +2,15 @@
 
 using namespace std;
 
-string getExePath()
-{
-#if (defined __unix__)
-    string path;
-    path.resize(1024);
-
-    auto ret = readlink("/proc/self/exe", &path[0], path.size());
-    path.resize(ret);
-    return path;
-#else
-#if (defined __WINDOWS__)
-    WCHAR path[1024];
-    DWORD size = GetModuleFileNameW(NULL, path, 1024);
-    return path;
-#endif
-#endif
-}
-
 int input(
         int& main_peak, int& secondary_peak, vector<vector<int>>& table_length)
 {
     int N, k, l, x;
     ifstream fin;
     string path;
-    path = getExePath();
+    path = __FILE__;
     path = path.substr(0, path.find_last_of("/"));
-    path = path.substr(0, path.find_last_of("/"));
-    path += "/resourses/input.txt";
+    path += "/../resourses/input.txt";
 
     fin.open(path);
     if (!(fin >> N)) {
@@ -68,10 +49,9 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
 {
     ofstream fout;
     string path;
-    path = getExePath();
+    path = __FILE__;
     path = path.substr(0, path.find_last_of("/"));
-    path = path.substr(0, path.find_last_of("/"));
-    path += "/resourses/output.txt";
+    path += "/../resourses/output.txt";
 
     fout.open(path);
 

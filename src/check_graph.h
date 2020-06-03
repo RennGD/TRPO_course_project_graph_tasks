@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int connectivity(vector<vector<int>> table_length);
+int connectivity(vector<vector<int>> table_length, int cities, int main_peak);
 int check_loop(vector<vector<int>> table_length);
 
 #endif

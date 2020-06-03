@@ -5,8 +5,15 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <unistd.h>
 #include <vector>
+
+#if (defined __unix__)
+#include <unistd.h>
+#else
+#if (defined __WINDOWS__)
+#include <Windows.h>
+#endif
+#endif
 
 using namespace std;
 

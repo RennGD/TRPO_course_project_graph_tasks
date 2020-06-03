@@ -4,12 +4,20 @@ using namespace std;
 
 string getExePath()
 {
+#if (defined __unix__)
     string path;
     path.resize(1024);
 
     auto ret = readlink("/proc/self/exe", &path[0], path.size());
     path.resize(ret);
     return path;
+#else
+#if (defined __WINDOWS__)
+    WCHAR path[1024];
+    DWORD size = GetModuleFileNameW(NULL, path, 1024);
+    return path;
+#endif
+#endif
 }
 
 int input(

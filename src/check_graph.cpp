@@ -2,12 +2,12 @@
 
 using namespace std;
 
-int check_loop(vector<vector<int>> table_length)
+bool check_loop(vector<vector<int>> table_length)
 {
     for (int i = 0, n = table_length.size(); i < n; i++)
         if (table_length[i][i] != 0)
-            return 1;
-    return 0;
+            return true;
+    return false;
 }
 
 bool connectivity(vector<vector<int>> table_length, int cities, int main_peak)

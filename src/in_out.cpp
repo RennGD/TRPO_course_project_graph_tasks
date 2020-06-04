@@ -9,15 +9,18 @@ int input(
     ifstream fin;
     string path;
     path = __FILE__;
+    cout << path << endl;
     path = path.substr(0, path.find_last_of("\\/"));
+    cout << path << endl;
 
 #ifdef __unix__
     path += "/../resourses/input.txt";
-#else
+#endif
 #ifdef _WIN32
     path += "\\..\\resourses\\input.txt";
 #endif
-#endif
+    cout << path << endl;
+    cin >> N;
 
     fin.open(path);
     if (!(fin >> N)) {
@@ -33,12 +36,29 @@ int input(
         return 1;
     }
 
+    if (N < 1) {
+        cerr << "Number of vertices mast be more 0";
+        return 1;
+    }
+    if ((main_peak < 0) || (main_peak >= N)) {
+        cerr << "Given main peak doesnt exist";
+        return 1;
+    }
+    if ((secondary_peak < 0) || (secondary_peak >= N)) {
+        cerr << "Given secondary peak doesnt exist";
+        return 1;
+    }
+
     table_length.resize(N);
     for (int i = 0, size = table_length.size(); i < size; i++) {
         table_length[i].resize(N);
     }
 
     while (fin >> k >> l >> x) {
+        if ((k < 0) || (k >= N) || (l < 0) || (l >= N) || (x < 1)) {
+            cerr << "Incorrect data when reading edges";
+            return 1;
+        }
         table_length[l][k] = table_length[k][l] = x;
     }
 
@@ -57,14 +77,13 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
     ofstream fout;
     string path;
     path = __FILE__;
-    path = path.substr(0, path.find_last_of("/"));
+    path = path.substr(0, path.find_last_of("\\/"));
 
 #ifdef __unix__
     path += "/../resourses/output.txt";
-#else
+#endif
 #ifdef _WIN32
     path += "\\..\\resourses\\output.txt";
-#endif
 #endif
 
     fout.open(path);

@@ -2,22 +2,48 @@
 
 using namespace std;
 
+#ifdef __unix__
+string getExePath()
+{
+    string path;
+    path.resize(1024);
+
+    auto ret = readlink("/proc/self/exe", &path[0], path.size());
+
+    path.resize(ret);
+
+    return path;
+}
+#endif
+#ifdef _WIN32
+string getExePath()
+{
+    string path;
+    path.resize(1024);
+    GetCurrentDirectoryW(1024, path);
+
+    return path;
+}
+#endif
+
 int input(
         int& main_peak, int& secondary_peak, vector<vector<int>>& table_length)
 {
     int N, k, l, x;
     ifstream fin;
     string path;
-    path = __FILE__;
+    path = getExePath();
+    cout << path << endl;
+    path = path.substr(0, path.find_last_of("\\/"));
     cout << path << endl;
     path = path.substr(0, path.find_last_of("\\/"));
     cout << path << endl;
 
 #ifdef __unix__
-    path += "/../resourses/input.txt";
+    path += "/resourses/input.txt";
 #endif
 #ifdef _WIN32
-    path += "\\..\\resourses\\input.txt";
+    path += "\\resourses\\input.txt";
 #endif
     cout << path << endl;
     cin >> N;
@@ -76,14 +102,15 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
 {
     ofstream fout;
     string path;
-    path = __FILE__;
+    path = getExePath();
+    path = path.substr(0, path.find_last_of("\\/"));
     path = path.substr(0, path.find_last_of("\\/"));
 
 #ifdef __unix__
-    path += "/../resourses/output.txt";
+    path += "/resourses/output.txt";
 #endif
 #ifdef _WIN32
-    path += "\\..\\resourses\\output.txt";
+    path += "\\resourses\\output.txt";
 #endif
 
     fout.open(path);

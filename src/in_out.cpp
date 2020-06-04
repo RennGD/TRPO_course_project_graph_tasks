@@ -11,6 +11,7 @@ string getExePath()
     auto ret = readlink("/proc/self/exe", &path[0], path.size());
 
     path.resize(ret);
+    path = path.substr(0, path.find_last_of("\\/"));
 
     return path;
 }
@@ -34,8 +35,6 @@ int input(
     ifstream fin;
     string path;
     path = getExePath();
-    cout << path << endl;
-    path = path.substr(0, path.find_last_of("\\/"));
     cout << path << endl;
     path = path.substr(0, path.find_last_of("\\/"));
     cout << path << endl;
@@ -104,7 +103,6 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
     ofstream fout;
     string path;
     path = getExePath();
-    path = path.substr(0, path.find_last_of("\\/"));
     path = path.substr(0, path.find_last_of("\\/"));
 
 #ifdef __unix__

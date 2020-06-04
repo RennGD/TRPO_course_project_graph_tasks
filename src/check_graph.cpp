@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool visit_top[cities];
+vector<bool> visit_top;
 
 bool check_loop(vector<vector<int>> table_length)
 {

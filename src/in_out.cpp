@@ -9,8 +9,15 @@ int input(
     ifstream fin;
     string path;
     path = __FILE__;
-    path = path.substr(0, path.find_last_of("/"));
+    path = path.substr(0, path.find_last_of("\\/"));
+
+#ifdef __unix__
     path += "/../resourses/input.txt";
+#else
+#ifdef _WIN32
+    path += "\\..\\resourses\\input.txt";
+#endif
+#endif
 
     fin.open(path);
     if (!(fin >> N)) {
@@ -51,7 +58,14 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
     string path;
     path = __FILE__;
     path = path.substr(0, path.find_last_of("/"));
+
+#ifdef __unix__
     path += "/../resourses/output.txt";
+#else
+#ifdef _WIN32
+    path += "\\..\\resourses\\output.txt";
+#endif
+#endif
 
     fout.open(path);
 

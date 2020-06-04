@@ -35,9 +35,7 @@ int input(
     ifstream fin;
     string path;
     path = getExePath();
-    cout << path << endl;
     path = path.substr(0, path.find_last_of("\\/"));
-    cout << path << endl;
 
 #ifdef __unix__
     path += "/resourses/input.txt";
@@ -45,8 +43,6 @@ int input(
 #ifdef _WIN32
     path += "\\resourses\\input.txt";
 #endif
-    cout << path << endl;
-    cin >> N;
 
     fin.open(path);
     if (!(fin >> N)) {

@@ -10,8 +10,7 @@ int check_loop(vector<vector<int>> table_length)
     return 0;
 }
 
-int connectivity(
-        const vector<vector<int>> table_length, int cities, int main_peak)
+bool connectivity(vector<vector<int>> table_length, int cities, int main_peak)
 {
     bool visit_top[cities];
     visit_top[main_peak] = true;
@@ -20,5 +19,10 @@ int connectivity(
         if (!visit_top[to])
             connectivity(table_length, cities, to);
     }
-    return 0;
+    for (int i = 0; i < cities; ++i) {
+        if (!visit_top[i]) {
+            return false;
+        }
+    }
+    return true;
 }

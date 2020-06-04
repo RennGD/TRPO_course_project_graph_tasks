@@ -18,8 +18,7 @@ string getExePath()
 #ifdef _WIN32
 string getExePath()
 {
-    string path;
-    path.resize(1024);
+    char path[1024];
     GetCurrentDirectoryW(1024, path);
 
     return path;

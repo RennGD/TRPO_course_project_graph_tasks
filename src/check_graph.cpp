@@ -2,6 +2,8 @@
 
 using namespace std;
 
+bool visit_top[cities];
+
 bool check_loop(vector<vector<int>> table_length)
 {
     for (int i = 0, n = table_length.size(); i < n; i++)
@@ -10,9 +12,9 @@ bool check_loop(vector<vector<int>> table_length)
     return false;
 }
 
-bool connectivity(vector<vector<int>> table_length, int cities, int main_peak)
+bool connectivity(vector<vector<int>>& table_length, int cities, int main_peak)
 {
-    bool visit_top[cities];
+    visit_top.resize(cities);
     visit_top[main_peak] = true;
     for (size_t i = 0; i < table_length[main_peak].size(); ++i) {
         int to = table_length[main_peak][i];

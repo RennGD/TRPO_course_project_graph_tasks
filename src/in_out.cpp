@@ -20,8 +20,10 @@ string getExePath()
 {
     WCHAR path[1024];
     GetCurrentDirectoryW(1024, path);
+    wstring ws = path;
+    string s(ws.begin(), ws.end());
 
-    return path;
+    return s;
 }
 #endif
 

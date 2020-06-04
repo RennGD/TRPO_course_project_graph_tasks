@@ -2,15 +2,51 @@
 
 using namespace std;
 
+#ifdef __unix__
+string getExePath()
+{
+    string path;
+    path.resize(1024);
+
+    auto ret = readlink("/proc/self/exe", &path[0], path.size());
+
+    path.resize(ret);
+    path = path.substr(0, path.find_last_of("\\/"));
+
+    return path;
+}
+#endif
+#ifdef _WIN32
+string getExePath()
+{
+    WCHAR path[1024];
+    GetCurrentDirectoryW(1024, path);
+    wstring ws = path;
+    string s(ws.begin(), ws.end());
+
+    return s;
+}
+#endif
+
 int input(
         int& main_peak, int& secondary_peak, vector<vector<int>>& table_length)
 {
     int N, k, l, x;
     ifstream fin;
     string path;
-    path = __FILE__;
-    path = path.substr(0, path.find_last_of("/"));
-    path += "/../resourses/input.txt";
+    path = getExePath();
+    cout << path << endl;
+    path = path.substr(0, path.find_last_of("\\/"));
+    cout << path << endl;
+
+#ifdef __unix__
+    path += "/resourses/input.txt";
+#endif
+#ifdef _WIN32
+    path += "\\resourses\\input.txt";
+#endif
+    cout << path << endl;
+    cin >> N;
 
     fin.open(path);
     if (!(fin >> N)) {
@@ -26,12 +62,29 @@ int input(
         return 1;
     }
 
+    if (N < 1) {
+        cerr << "Number of vertices mast be more 0";
+        return 1;
+    }
+    if ((main_peak < 0) || (main_peak >= N)) {
+        cerr << "Given main peak doesnt exist";
+        return 1;
+    }
+    if ((secondary_peak < 0) || (secondary_peak >= N)) {
+        cerr << "Given secondary peak doesnt exist";
+        return 1;
+    }
+
     table_length.resize(N);
     for (int i = 0, size = table_length.size(); i < size; i++) {
         table_length[i].resize(N);
     }
 
     while (fin >> k >> l >> x) {
+        if ((k < 0) || (k >= N) || (l < 0) || (l >= N) || (x < 1)) {
+            cerr << "Incorrect data when reading edges";
+            return 1;
+        }
         table_length[l][k] = table_length[k][l] = x;
     }
 
@@ -49,9 +102,15 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
 {
     ofstream fout;
     string path;
-    path = __FILE__;
-    path = path.substr(0, path.find_last_of("/"));
-    path += "/../resourses/output.txt";
+    path = getExePath();
+    path = path.substr(0, path.find_last_of("\\/"));
+
+#ifdef __unix__
+    path += "/resourses/output.txt";
+#endif
+#ifdef _WIN32
+    path += "\\resourses\\output.txt";
+#endif
 
     fout.open(path);
 

@@ -47,6 +47,16 @@ int input(
 #endif
 
     fin.open(path);
+    if (!fin.is_open()) {
+        cerr << "input.txt missing" << endl;
+        return 1;
+    }
+
+    if (fin.peek() == EOF) {
+        cerr << "input.txt is empty" << endl;
+        return 1;
+    }
+
     if (!(fin >> N)) {
         cerr << "Error number of vertices" << endl;
         return 1;
@@ -111,6 +121,10 @@ int output(vector<int> min, vector<int> max, int one_vertex, int one_edge)
 #endif
 
     fout.open(path);
+    if (!fout.is_open()) {
+        cerr << "output.txt missing" << endl;
+        return 1;
+    }
 
     fout << "Minimal path between given vertex and others:";
     fout << "\nvrtx";

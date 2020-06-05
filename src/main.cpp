@@ -1,4 +1,5 @@
 #include "all_path.h"
+#include "check_graph.h"
 #include "in_out.h"
 #include "one_path.h"
 #include <vector>
@@ -13,6 +14,15 @@ int main()
 
     if (input(main_peak, secondary_peak, table_length))
         return 1;
+
+    if (!connectivity(table_length, main_peak)) {
+        cerr << "Graph mast be connected" << endl;
+        return 1;
+    }
+    if (check_loop(table_length)) {
+        cerr << "Graph mast not have loop" << endl;
+        return 1;
+    }
 
     min = dijkstra_min(table_length.size(), main_peak, table_length);
     max = dijkstra_max(table_length.size(), main_peak, table_length);

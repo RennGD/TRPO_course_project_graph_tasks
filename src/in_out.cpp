@@ -1,14 +1,16 @@
 #include "in_out.h"
 
+#define PATH_LENGTH 1024
+
 using namespace std;
 
 #ifdef __unix__
 string getExePath()
 {
     string path;
-    path.resize(1024);
+    path.resize(PATH_LENGTH);
 
-    auto ret = readlink("/proc/self/exe", &path[0], path.size());
+    auto ret = readlink("/proc/self/exe", &path[0], PATH_LENGTH);
 
     path.resize(ret);
     path = path.substr(0, path.find_last_of("\\/"));
@@ -19,8 +21,8 @@ string getExePath()
 #ifdef _WIN32
 string getExePath()
 {
-    WCHAR path[1024];
-    GetCurrentDirectoryW(1024, path);
+    WCHAR path[PATH_LENGTH];
+    GetCurrentDirectoryW(PATH_LENGTH, path);
     wstring ws = path;
     string s(ws.begin(), ws.end());
 

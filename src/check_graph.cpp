@@ -1,8 +1,7 @@
 #include "check_graph.h"
+#include <iostream>
 
 using namespace std;
-
-vector<bool> visit_top;
 
 bool check_loop(vector<vector<int>> table_length)
 {
@@ -12,19 +11,27 @@ bool check_loop(vector<vector<int>> table_length)
     return false;
 }
 
-bool connectivity(vector<vector<int>>& table_length, int cities, int main_peak)
+bool connectivity(vector<vector<int>>& table_length, int main_peak)
 {
-    visit_top.resize(cities);
-    visit_top[main_peak] = true;
-    for (size_t i = 0; i < table_length[main_peak].size(); ++i) {
-        int to = table_length[main_peak][i];
-        if (!visit_top[to])
-            connectivity(table_length, cities, to);
-    }
-    for (int i = 0; i < cities; ++i) {
+    vector<bool> visit_top;
+    visit_top.resize(table_length.size());
+    search_connect(table_length, visit_top, main_peak);
+    for (int i = 0, m = visit_top.size(); i < m; ++i) {
         if (!visit_top[i]) {
             return false;
         }
     }
     return true;
+}
+
+void search_connect(
+        vector<vector<int>>& table_length,
+        vector<bool>& visit_top,
+        int main_peak)
+{
+    visit_top[main_peak] = true;
+    for (int i = 0, m = table_length.size(); i < m; ++i) {
+        if ((!visit_top[i]) && (table_length[main_peak][i] > 0))
+            search_connect(table_length, visit_top, i);
+    }
 }

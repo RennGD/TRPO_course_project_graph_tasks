@@ -1,8 +1,5 @@
-*.o
-object/test/*
-object/src/*
+object/test/*.o
+object/src/*.o
 bin/*
-!object/test/.gitkeep
-!object/src/.gitkeep
 !bin/.gitkeep
-.idea/
+resourses/*.txt
